@@ -1,0 +1,41 @@
+{
+  "name": "netlogix/nlxshopwareimageproxy",
+  "version": "v1.0.0",
+  "description": "Plugin to allow shopware to authenticate and support image proxy",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "nlxShopwareImageProxy\\": "src/"
+    }
+  },
+  "require": {
+    "shopware/core": "dev-trunk"
+  },
+  "require-dev": {
+    "php": ">= 8.2",
+    "infection/infection": "^0.29",
+    "phpunit/phpunit": "^12.0",
+    "netlogix/coding-guidelines-php": "^1.0"
+  },
+  "conflict": {
+    "shopware/core": "<6.7.0"
+  },
+  "scripts": {
+    "lint": "ecs check",
+    "lint-fix": "ecs check --fix"
+  },
+  "extra": {
+    "shopware-plugin-class": "nlxShopwareImageProxy\\nlxShopwareImageProxy",
+    "label": {
+      "de-DE": "Bilder Proxy Unterstützung",
+      "en-GB": "Image proxy support"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/runtime": true,
+      "infection/extension-installer": true
+    }
+  }
+}
