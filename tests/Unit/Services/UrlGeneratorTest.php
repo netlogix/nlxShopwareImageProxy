@@ -16,6 +16,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(UrlGenerator::class)]
+#[CoversClass(ImageProxyOptionDTO::class)]
 class UrlGeneratorTest extends TestCase
 {
     private UrlGenerator $subject;

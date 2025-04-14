@@ -17,6 +17,7 @@ use Shopware\Core\Content\Media\Core\Params\UrlParams;
 use Shopware\Core\Content\Media\Core\Params\UrlParamsSource;
 
 #[CoversClass(MediaUrlGeneratorDecorator::class)]
+#[CoversClass(UrlGenerator::class)]
 class MediaUrlGeneratorDecoratorTest extends TestCase
 {
     private MediaUrlGeneratorDecorator $subject;
