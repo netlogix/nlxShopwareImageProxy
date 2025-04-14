@@ -38,7 +38,7 @@ jobs:
       - name: 'Add Unit Test Code Coverage to file'
         shell: bash
         run: |
-          echo '## Code Coverage Summery for unit tests' >> code-coverage-merged.md
+          echo '## Code Coverage Summary for unit tests' >> code-coverage-merged.md
           cat code-coverage-summary.md >> code-coverage-merged.md
 
           echo '## Code Coverage for unit tests' >> $GITHUB_STEP_SUMMARY
