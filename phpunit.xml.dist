@@ -29,9 +29,9 @@
     <coverage ignoreDeprecatedCodeUnits="true"
               disableCodeCoverageIgnore="true">
         <report>
-            <clover outputFile=".Build/artifacts/reports/unit/clover.xml"/>
-            <php outputFile=".Build/artifacts/coverage/unit.cov"/>
-            <html outputDirectory=".Build/artifacts/coverage/unit"/>
+            <clover outputFile=".Build/Artifacts/Reports/Unit/clover.xml"/>
+            <php outputFile=".Build/Artifacts/Coverage/unit.cov"/>
+            <html outputDirectory=".Build/Artifacts/Coverage/Unit"/>
         </report>
     </coverage>
 
