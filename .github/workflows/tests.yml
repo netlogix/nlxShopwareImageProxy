@@ -15,8 +15,47 @@ jobs:
 
     steps:
       - name: 'Checkout Code'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - uses: ./.github/actions/phpunit-test
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
         with:
-          github_token: ${{ secrets.COMPOSER_AUTH }}
+          php-version: '8.2'
+          tools: composer
+          coverage: 'xdebug3'
+
+      - name: 'Validate composer.json and composer.lock'
+        shell: bash
+        run: composer validate --strict
+
+      - name: 'Install Composer Dependencies'
+        shell: bash
+        run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
+
+      - name: 'Run Unit Tests'
+        shell: bash
+        env:
+          XDEBUG_MODE: 'coverage'
+        run: vendor/bin/phpunit --coverage-clover Build/Artifacts/Reports/Unit/clover.xml
+
+      - name: 'Generate Unit Test Code Coverage Summary Report'
+        uses: saschanowak/CloverCodeCoverageSummary@0.3.1
+        with:
+          filename: Build/Artifacts/Reports/Unit/clover.xml
+
+      - name: 'Add Unit Test Code Coverage to file'
+        shell: bash
+        run: |
+          echo '## Code Coverage Summery for unit tests' >> code-coverage-merged.md
+          cat code-coverage-summary.md >> code-coverage-merged.md
+
+          echo '## Code Coverage for unit tests' >> $GITHUB_STEP_SUMMARY
+          cat code-coverage-summary.md >> $GITHUB_STEP_SUMMARY
+          cat code-coverage-details.md >> $GITHUB_STEP_SUMMARY
+
+      - name: 'Add Code Coverage as PR Comment'
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: github.event_name == 'pull_request'
+        with:
+          recreate: true
+          path: code-coverage-merged.md
