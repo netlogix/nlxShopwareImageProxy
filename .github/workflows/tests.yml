@@ -37,25 +37,3 @@ jobs:
         env:
           XDEBUG_MODE: 'coverage'
         run: vendor/bin/phpunit tests/Unit
-
-      - name: 'Generate Unit Test Code Coverage Summary Report'
-        uses: saschanowak/CloverCodeCoverageSummary@0.3.1
-        with:
-          filename: .Build/Artifacts/Reports/Unit/clover.xml
-
-      - name: 'Add Unit Test Code Coverage to file'
-        shell: bash
-        run: |
-          echo '## Code Coverage Summery for unit tests' >> code-coverage-merged.md
-          cat code-coverage-summary.md >> code-coverage-merged.md
-
-          echo '## Code Coverage for unit tests' >> $GITHUB_STEP_SUMMARY
-          cat code-coverage-summary.md >> $GITHUB_STEP_SUMMARY
-          cat code-coverage-details.md >> $GITHUB_STEP_SUMMARY
-
-      - name: 'Add Code Coverage as PR Comment'
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: github.event_name == 'pull_request'
-        with:
-          recreate: true
-          path: code-coverage-merged.md
