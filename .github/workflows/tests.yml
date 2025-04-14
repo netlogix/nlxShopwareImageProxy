@@ -36,12 +36,12 @@ jobs:
         shell: bash
         env:
           XDEBUG_MODE: 'coverage'
-        run: vendor/bin/phpunit --coverage-clover Build/Artifacts/Reports/Unit/clover.xml
+        run: vendor/bin/phpunit tests/Unit
 
       - name: 'Generate Unit Test Code Coverage Summary Report'
         uses: saschanowak/CloverCodeCoverageSummary@0.3.1
         with:
-          filename: Build/Artifacts/Reports/Unit/clover.xml
+          filename: .Build/Artifacts/Reports/Unit/clover.xml
 
       - name: 'Add Unit Test Code Coverage to file'
         shell: bash

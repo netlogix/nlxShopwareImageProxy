@@ -1,5 +1,6 @@
 /src/Resources/app/storefront/dist/
 /.phpunit.result.cache
 /.phpunit.cache
+.Build/
 /vendor/
 composer.lock

@@ -28,6 +28,11 @@
 
     <coverage ignoreDeprecatedCodeUnits="true"
               disableCodeCoverageIgnore="true">
+        <report>
+            <clover outputFile=".Build/artifacts/reports/unit/clover.xml"/>
+            <php outputFile=".Build/artifacts/coverage/unit.cov"/>
+            <html outputDirectory=".Build/artifacts/coverage/unit"/>
+        </report>
     </coverage>
 
     <source>
