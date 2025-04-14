@@ -19,11 +19,19 @@ jobs:
       - name: 'Checkout Code'
         uses: actions/checkout@v4
 
-      - name: 'Composer install'
-        uses: netlogix/actions/.github/actions/composer-install@main
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-          github_token: ${{ secrets.COMPOSER_AUTH }}
+          php-version: '8.3'
+          tools: composer
+
+      - name: 'Validate composer.json and composer.lock'
+        shell: bash
+        run: composer validate
+
+      - name: 'Install Composer Dependencies'
+        shell: bash
+        run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
       - name: 'ECS PHP Code'
         shell: bash
