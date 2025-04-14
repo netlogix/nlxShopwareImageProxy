@@ -17,13 +17,6 @@ jobs:
       - name: 'Checkout Code'
         uses: actions/checkout@v3
 
-      - uses: netlogix/actions/.github/actions/composer-install@main
-        with:
-          php-version: '8.2'
-          coverage: 'xdebug3'
-          args: '--prefer-dist --no-progress --no-interaction --optimize-autoloader'
-          github_token: ${{ secrets.COMPOSER_AUTH }}
-
       - uses: ./.github/actions/phpunit-test
         with:
           github_token: ${{ secrets.COMPOSER_AUTH }}
