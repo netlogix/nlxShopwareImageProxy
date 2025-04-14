@@ -15,7 +15,6 @@ runs:
         php-version: '8.2'
         coverage: 'xdebug3'
         args: '--prefer-dist --no-progress --no-interaction --optimize-autoloader'
-        github_token: ${{ inputs.github_token }}
 
     - name: 'Run Unit Tests'
       shell: bash
