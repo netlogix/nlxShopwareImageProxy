@@ -1,0 +1,54 @@
+name: Apply Coding Standard
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  php-coding-standard:
+    name: 'Apply PHP Coding Standard'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Code'
+        uses: actions/checkout@v4
+
+      - name: 'Setup PHP'
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer
+
+      - name: 'Validate composer.json and composer.lock'
+        shell: bash
+        run: composer validate
+
+      - name: 'Install Composer Dependencies'
+        shell: bash
+        run: composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
+
+      - name: 'ECS PHP Code'
+        shell: bash
+        run: composer lint-fix
+
+      - name: 'Create pull-request'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "[automated] Apply Coding Standard"
+          branch: 'automated-apply-coding-standards'
+          title: '[automated] Apply Coding Standard'
+          labels: 'automated'
+          delete-branch: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Enable Pull Request Merge when ready'
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        run: gh pr merge --auto "${{ steps.cpr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

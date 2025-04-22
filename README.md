@@ -12,6 +12,8 @@ composer require netlogix/nlxShopwreImageProxy
 
 Use the image proxy `darthsim/imgproxy` in your docker-compose file to quickly and easily resize images.
 
+Define IMAGE_PROXY_HOST in your .env file to set the image proxy host.
+
 For signing URLs you have to define the following environment variables:
 - IMGPROXY_KEY: hex-encoded key
 - IMGPROXY_SALT: hex-encoded salt
