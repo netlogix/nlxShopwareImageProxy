@@ -36,6 +36,7 @@ class RemoteThumbnailUrlExtensionSubscriberTest extends TestCase
     {
         $extension = new ResolveRemoteThumbnailUrlExtension('media_url', 'test/image.jpg', '100', '100', 'pattern', null);
         $expectedUrlPattern = '/^https:\/\/image-proxy\.example\.com\/[a-zA-Z0-9_-]+\/resize:fit:\d+:\d+:no:0\/[a-zA-Z0-9_-]+$/';
+
         $this->subject->__invoke($extension);
 
         $this->assertTrue($extension->isPropagationStopped());

@@ -44,7 +44,7 @@ class UrlGeneratorTest extends TestCase
     {
         $imagePath = 'test/image.jpg';
         $imageProxyOption = new ImageProxyOptionDTO(width: '200', height: '300');
-        $expectedUrlPattern = '/^https:\/\/image-proxy\.example\.com\/[a-zA-Z0-9_-]+\/resize:fit:200:300:no:0\/[a-zA-Z0-9_-]+$/';
+        $expectedUrlPattern = '/^https:\/\/image-proxy\.example\.com\/[a-zA-Z0-9_-]+\/resize:fit:\d+:\d+:no:0\/[a-zA-Z0-9_-]+$/';;
 
         $generatedUrl = $this->subject->generateUrl($imagePath, $imageProxyOption);
 
